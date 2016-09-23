@@ -7,22 +7,30 @@ angular.module('ShoppingListCheckOff', [])
 .controller('AlreadyBoughtShoppingController', BoughtListController)
 .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-ToBuyListController.$inject = ['$scope', 'ShoppingListCheckOffService'];
+ToBuyListController.$inject = ['ShoppingListCheckOffService'];
 
-function ToBuyListController($scope, BuyingService) {
-  $scope.items = BuyingService.getItemsToBuy();
-  $scope.bought = BuyingService.addToBought;
+function ToBuyListController(BuyingService) {
+  var ctrl1 = this;
+  ctrl1.items = BuyingService.getItemsToBuy();
+  ctrl1.bought = BuyingService.addToBought;
 }
 
 BoughtListController.$inject = ['$scope', 'ShoppingListCheckOffService'];
 function BoughtListController($scope, BuyingService) {
-  $scope.items = BuyingService.getItemsBought();
+  var ctrl2 = this;
+  ctrl2.items = BuyingService.getItemsBought();
 }
 
 function ShoppingListCheckOffService() {
   var service = this;
 
-  var itemsToBuy = [{'name':'cookies','quantity':1},{'name':'drinks','quantity':2},{'name':'candy','quantity':3}];
+  var itemsToBuy = [{'name':'cookies','quantity':1},
+  {'name':'drinks','quantity':2},
+  {'name':'candy','quantity':3},
+  {'name':'sugar','quantity':7},
+  {'name':'oranges','quantity':10}
+  ];
+
   var itemsBought = [];
 
   service.getItemsToBuy = function() {
